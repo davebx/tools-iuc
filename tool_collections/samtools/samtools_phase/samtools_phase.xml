@@ -1,12 +1,13 @@
-<tool id="samtools_phase" name="Call and phase" version="2.0">
+<tool id="samtools_phase" name="Call and phase" version="2.1">
     <description>heterozygous SNPs</description>
     <macros>
         <import>macros.xml</import>
     </macros>
-    <expand macro="requirements"/>
-    <expand macro="stdio"/>
-    <expand macro="version_command"/>
-    <command><![CDATA[
+    <expand macro="requirements" />
+    <expand macro="version_command" />
+    <expand macro="stdio" />
+    <command>
+    <![CDATA[
     samtools phase -b "phase_wrapper"
         #if str($option_set.option_sets) == 'advanced':
             ${option_set.ignore_chimeras}
@@ -16,13 +17,11 @@
             -D $option_set.read_depth
             ${option_set.drop_ambiguous}
         #else
-            -k 13
-            -q 37
-            -Q 13
-            -D 256
+            -k 13 -q 37 -Q 13 -D 256
         #end if
         '$input_bam' > '$phase_sets'
-    ]]></command>
+    ]]>
+    </command>
     <inputs>
         <param format="bam" name="input_bam" type="data" label="Select dataset to phase"/>
         <conditional name="option_set">
@@ -49,16 +48,16 @@
     </outputs>
     <tests>
         <test>
-            <param name="option_sets" value="default" /> 
-            <param name="input_bam" value="samtools_phase_in_1.bam" /> 
+            <param name="option_sets" value="default" />
+            <param name="input_bam" value="samtools_phase_in_1.bam" />
             <output name="phase_sets" file="samtools_phase_out_1_log.txt" ftype="txt" />
             <output name="phase0" file="samtools_phase_out_1_phase0.bam" ftype="bam" />
             <output name="phase1" file="samtools_phase_out_1_phase1.bam" ftype="bam" />
             <output name="chimera" file="empty_file.bam" compare="contains" />
         </test>
         <test>
-            <param name="input_bam" value="samtools_phase_in_2.bam" /> 
-            <param name="option_sets" value="advanced" /> 
+            <param name="input_bam" value="samtools_phase_in_2.bam" />
+            <param name="option_sets" value="advanced" />
             <param name="option_set|block_length" value="13" />
             <param name="option_set|min_het" value="37" />
             <param name="option_set|min_bq" value="13" />
@@ -71,8 +70,8 @@
             <output name="chimera" file="empty_file.bam" compare="contains" />
         </test>
         <test>
-            <param name="input_bam" value="samtools_phase_in_2.bam" /> 
-            <param name="option_sets" value="advanced" /> 
+            <param name="input_bam" value="samtools_phase_in_2.bam" />
+            <param name="option_sets" value="advanced" />
             <param name="option_set|block_length" value="13" />
             <param name="option_set|min_het" value="37" />
             <param name="option_set|min_bq" value="13" />
@@ -86,10 +85,11 @@
         </test>
     </tests>
     <help>
+<![CDATA[
 **What it does**
 
 Call and phase heterozygous SNPs
-    
+
 ------
 
 .. list-table:: **Options**
@@ -128,7 +128,7 @@ Call and phase heterozygous SNPs
      - BOOLEAN
      - Drop reads with ambiguous phase
      - *off*
-
+]]>
     </help>
-    <expand macro="citations"/>
+    <expand macro="citations" />
 </tool>

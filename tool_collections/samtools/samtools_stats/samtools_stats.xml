@@ -1,12 +1,13 @@
-<tool id="samtools_stats" name="Stats" version="2.0">
+<tool id="samtools_stats" name="Stats" version="2.1">
     <description>generate statistics for BAM dataset</description>
     <macros>
-    <import>macros.xml</import>
-  </macros>
-    <expand macro="requirements"/>
-    <expand macro="stdio"/>
-    <expand macro="version_command"/>
-    <command><![CDATA[
+        <import>macros.xml</import>
+    </macros>
+    <expand macro="requirements" />
+    <expand macro="version_command" />
+    <expand macro="stdio" />
+    <command>
+        <![CDATA[
         #if $use_reference.use_ref_selector == "yes":
             #if $use_reference.reference_source.reference_source_selector == "history":
                ln -s '${use_reference.reference_source.ref_file}' &&
@@ -52,7 +53,7 @@
                 #end if
             #end if
             > "${output}"
-        
+
         #if $split_output.split_output_selector == "yes":
             #set outputs_to_split = str($split_output.generate_tables).split(',')
             && mkdir split &&
@@ -129,7 +130,8 @@
             true
 
         #end if
-        ]]></command>
+        ]]>
+    </command>
     <inputs>
         <param name="input_file" type="data" format="sam,bam" label="BAM file" />
         <param name="coverage_min" type="integer" value="1" label="Minimum coverage" help="minimum coverage"/>
@@ -202,7 +204,7 @@
 
         <!--
 
-            The -I option of samtools stats returns the following message in version 1.2:
+            The -I option of samtools stats still returns the following message in version 1.4:
 
             Samtools-htslib: init_group_id() header parsing not yet implemented
             Abort trap: 6
@@ -276,7 +278,8 @@
             </output>
         </test>
     </tests>
-    <help><![CDATA[
+    <help>
+<![CDATA[
 **What it does**
 
 This tool runs the ``samtools stats`` command. It has the following options::
@@ -295,7 +298,8 @@ This tool runs the ``samtools stats`` command. It has the following options::
     -r, --ref-seq <file>                Reference sequence (required for GC-depth and mismatches-per-cycle calculation). Galaxy
                                         will provide options for selecting a reference cached as this Galaxy instance or choosing
                                         one from history.
-    ]]></help>
-    <expand macro="citations"/>
+]]>
+    </help>
+    <expand macro="citations" />
 </tool>
 

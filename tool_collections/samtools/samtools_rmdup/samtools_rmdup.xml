@@ -3,13 +3,12 @@
     <macros>
         <import>macros.xml</import>
     </macros>
-
     <expand macro="requirements" />
-    <expand macro="stdio"/>
-    <expand macro="version_command"/>
-
-    <command><![CDATA[
-    samtools rmdup 
+    <expand macro="version_command" />
+    <expand macro="stdio" />
+    <command>
+    <![CDATA[
+    samtools rmdup
         #if str( $bam_paired_end_type.bam_paired_end_type_selector ) == "PE"
             ${bam_paired_end_type.force_se}
         #else:
@@ -17,11 +16,11 @@
         #end if
         '$input1'
         '$output1'
-    ]]></command>
-    
+    ]]>
+    </command>
+
     <inputs>
         <param name="input1" type="data" format="bam" label="BAM File" />
-
         <conditional name="bam_paired_end_type">
             <param name="bam_paired_end_type_selector" type="select" label="Is this paired-end or single end data">
                 <option value="PE" selected="True">BAM is paired-end</option>
@@ -43,19 +42,18 @@
             <param name="input1" value="samtools-rmdup-input1.bam" ftype="bam" />
             <param name="bam_paired_end_type_selector" value="PE" />
             <param name="force_se" />
-
             <output name="output1" file="samtools-rmdup-test1.bam" ftype="bam" sort="True" />
         </test>
     </tests>
     <help>
-
+<![CDATA[
 **What it does**
 
 Remove potential PCR duplicates: if multiple read pairs have identical external coordinates, only retain the pair with highest mapping quality. In the paired-end mode, this command ONLY works with FR orientation and requires ISIZE is correctly set. It does not work for unpaired reads (e.g. two ends mapped to different chromosomes or orphan reads). This tool has the following parameters::
 
   -s    rmdup for SE reads
   -S    treat PE reads as SE in rmdup (force -s)
-
-  </help>
-    <expand macro="citations"/>
+]]>
+    </help>
+    <expand macro="citations" />
 </tool>

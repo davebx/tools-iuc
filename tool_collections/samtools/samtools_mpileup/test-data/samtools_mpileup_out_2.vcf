@@ -1,10 +1,10 @@
 ##fileformat=VCFv4.2
 ##FILTER=<ID=PASS,Description="All filters passed">
-##samtoolsVersion=1.1+htslib-1.1
-##samtoolsCommand=samtools mpileup --VCF --uncompressed -f /tmp/tmpId8vOP/tmp3bubIE/database/files/000/dataset_735.dat -g -e 20 -h 100 -L 250 -m 1 --open-prob 40 -F 0.002 -e 40 --output /tmp/tmpId8vOP/tmp3bubIE/database/files/000/dataset_736.dat /tmp/tmpId8vOP/tmp3bubIE/database/files/000/dataset_734.dat
-##reference=file:///tmp/tmpId8vOP/tmp3bubIE/database/files/000/dataset_735.dat
+##samtoolsVersion=1.4+htslib-1.4
+##samtoolsCommand=samtools mpileup -f /tmp/tmpiIMVoP/files/001/dataset_1368.dat --VCF --uncompressed -o 40 -e 20 -h 100 -L 250 -m 1 --open-prob 40 -F 0.002 --output /tmp/tmpiIMVoP/files/001/dataset_1369.dat localbam_0.bam
+##reference=file:///tmp/tmpiIMVoP/files/001/dataset_1368.dat
 ##contig=<ID=phiX174,length=5386>
-##ALT=<ID=X,Description="Represents allele(s) other than observed.">
+##ALT=<ID=*,Description="Represents allele(s) other than observed.">
 ##INFO=<ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL.">
 ##INFO=<ID=IDV,Number=1,Type=Integer,Description="Maximum number of reads supporting an indel">
 ##INFO=<ID=IMF,Number=1,Type=Float,Description="Maximum fraction of reads supporting an indel">
@@ -19,4 +19,47 @@
 ##INFO=<ID=I16,Number=16,Type=Float,Description="Auxiliary tag used for calling, see description of bcf_callret1_t in bam2bcf.h">
 ##INFO=<ID=QS,Number=R,Type=Float,Description="Auxiliary tag used for calling">
 ##FORMAT=<ID=PL,Number=G,Type=Integer,Description="List of Phred-scaled genotype likelihoods">
-#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	/tmp/tmpId8vOP/tmp3bubIE/database/files/000/dataset_734.dat
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	A Fake phiX Sample
+phiX174	1411	.	N	<*>	0	.	DP=1;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1412	.	N	<*>	0	.	DP=3;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1413	.	N	<*>	0	.	DP=5;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1414	.	N	<*>	0	.	DP=6;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1415	.	N	<*>	0	.	DP=7;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1416	.	N	<*>	0	.	DP=8;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1417	.	N	<*>	0	.	DP=9;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1418	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1419	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1420	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1421	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1422	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1423	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1424	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1425	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1426	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1427	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1428	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1429	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1430	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1431	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1432	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1433	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1434	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1435	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1436	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1437	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1438	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1439	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1440	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1441	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1442	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1443	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1444	.	N	<*>	0	.	DP=7;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1445	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1446	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1447	.	N	<*>	0	.	DP=10;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1448	.	N	<*>	0	.	DP=8;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1449	.	N	<*>	0	.	DP=6;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1450	.	N	<*>	0	.	DP=4;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1451	.	N	<*>	0	.	DP=3;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1452	.	N	<*>	0	.	DP=2;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0
+phiX174	1453	.	N	<*>	0	.	DP=1;I16=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0;QS=0,0;MQ0F=0	PL	0,0,0

@@ -3,26 +3,24 @@
     <macros>
         <import>macros.xml</import>
     </macros>
-    <expand macro="requirements"/>
-    <expand macro="stdio"/>
-    <expand macro="version_command"/>
-    <command><![CDATA[
-        #if str( $reference_source.reference_source_selector ) == "history":
+    <expand macro="requirements" />
+    <expand macro="version_command" />
+    <expand macro="stdio" />
+    <command>
+    <![CDATA[
+        #if str( $reference_source.reference_source_selector ) == 'history':
             #set ref_fa = 'ref.fa'
-            ln -s "${reference_source.ref_fasta}" ref.fa &&
-            samtools faidx ref.fa &&
+            ln -s '${reference_source.ref_fasta}' ref.fa && samtools faidx ref.fa &&
         #else:
             #set ref_fa = str( $reference_source.ref_fasta.fields.path )
         #end if
-        
         samtools calmd
-            #if str($option_set.option_sets) == 'advanced':
-                $option_set.change_identical $option_set.modify_quality $option_set.compute_cap $option_set.extended_baq
-            #end if
-            -b "$input_bam"
-            "$ref_fa"
-            > "$calmd_output"
-    ]]></command>
+        #if str($option_set.option_sets) == 'advanced':
+            $option_set.change_identical $option_set.modify_quality $option_set.compute_cap $option_set.extended_baq
+        #end if
+        -b '$input_bam' '$ref_fa' > '$calmd_output'
+    ]]>
+    </command>
     <inputs>
         <param format="bam" name="input_bam" type="data" label="BAM file to recalculate" />
         <conditional name="reference_source">
@@ -61,14 +59,14 @@
     </outputs>
     <tests>
         <test>
-            <param name="option_sets" value="default" /> 
+            <param name="option_sets" value="default" />
             <param name="input_bam" value="phiX.bam"/>
             <param name="reference_source_selector" value="history" />
             <param name="ref_fasta" value="phiX.fasta" />
             <output name="calmd_output" file="samtools_calmd_out_1.bam" ftype="bam" />
         </test>
         <test>
-            <param name="option_sets" value="advanced" /> 
+            <param name="option_sets" value="advanced" />
             <param name="change_identical" value="true" />
             <param name="extended_baq" value="true" />
             <param name="input_bam" value="phiX.bam"/>
@@ -78,6 +76,7 @@
         </test>
     </tests>
     <help>
+<![CDATA[
 **What it does**
 
 Generates the MD tag using ``samtools calmd`` command. If the MD tag (see SAM format refernce below for explanation of SAM/BAM tags) is already present, this command will give a warning if the MD tag generated is different from the existing tag. Outputs a BAM file. The command has the following options::
@@ -86,7 +85,7 @@ Generates the MD tag using ``samtools calmd`` command. If the MD tag (see SAM fo
   -A       modify the quality string
   -r       compute the BQ tag (without -A) or cap baseQ by BAQ (with -A)
   -E       extended BAQ for better sensitivity but lower specificity
-  
+
 -----
 
 **NM and MD tags**
@@ -95,9 +94,9 @@ From SAM format specification::
 
   MD (string)  String for mismatching positions. Regex : [0-9]+(([A-Z]|\^[A-Z]+)[0-9]+)*7
   NM (indeger) Edit distance to the reference, including ambiguous bases but excluding clipping
-  
-See refernces for more information about SAM format tags.
 
+See refernces for more information about SAM format tags.
+]]>
     </help>
-    <expand macro="citations"/>
+    <expand macro="citations" />
 </tool>
