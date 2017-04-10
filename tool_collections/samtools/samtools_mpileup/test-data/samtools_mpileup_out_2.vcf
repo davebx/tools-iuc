@@ -1,8 +1,8 @@
 ##fileformat=VCFv4.2
 ##FILTER=<ID=PASS,Description="All filters passed">
 ##samtoolsVersion=1.4+htslib-1.4
-##samtoolsCommand=samtools mpileup -f /tmp/tmpf1yW3E/files/000/dataset_915.dat --VCF --uncompressed -o 40 -e 20 -h 100 -L 250 -m 1 --open-prob 40 -F 0.002 --output /tmp/tmpf1yW3E/files/000/dataset_916.dat localbam_0.bam
-##reference=file:///tmp/tmpf1yW3E/files/000/dataset_915.dat
+##samtoolsCommand=samtools mpileup -f /tmp/tmpoMBJ5v/files/000/dataset_947.dat --VCF --uncompressed -o 40 -e 20 -h 100 -L 250 -m 1 --open-prob 40 -F 0.002 --output /tmp/tmpoMBJ5v/files/000/dataset_948.dat localbam_0.bam
+##reference=file:///tmp/tmpoMBJ5v/files/000/dataset_947.dat
 ##contig=<ID=chrM,length=16299>
 ##ALT=<ID=*,Description="Represents allele(s) other than observed.">
 ##INFO=<ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL.">

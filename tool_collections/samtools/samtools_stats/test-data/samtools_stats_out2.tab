@@ -1,6 +1,6 @@
 # This file was produced by samtools stats (1.4+htslib-1.4) and can be plotted using plot-bamstats
 # This file contains statistics for all reads.
-# The command line was:  stats --coverage 1,1000,1 --GC-depth 20000.0 --insert-size 8000 --most-inserts 0.99 --trim-quality 0 --ref-seq /tmp/tmpo62zB8/files/000/dataset_543.dat /tmp/tmpo62zB8/files/000/dataset_542.dat
+# The command line was:  stats --coverage 1,1000,1 --GC-depth 20000.0 --insert-size 8000 --most-inserts 0.99 --trim-quality 0 --ref-seq /tmp/tmpT74Q4l/files/001/dataset_1206.dat /tmp/tmpT74Q4l/files/001/dataset_1205.dat
 # CHK, Checksum	[2]Read Names	[3]Sequences	[4]Qualities
 # CHK, CRC32 of reads which passed filtering followed by addition (32bit overflow)
 CHK	1bd20fd8	58ad2167	29883386

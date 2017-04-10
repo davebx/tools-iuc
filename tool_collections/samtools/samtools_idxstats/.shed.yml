@@ -6,7 +6,11 @@ long_description: |
   Runs "samtools idxstats" to get mapping statistics from a sorted
   index BAM file as a tabular output file.
 name: samtools_idxstats
+<<<<<<< HEAD
 owner: iuc
+=======
+owner: devteam
+>>>>>>> f8fb9deb0aa36e2bda92e2df8a4faac26ebdb722
 homepage_url: http://www.htslib.org/
 remote_repository_url: https://github.com/galaxyproject/tools-iuc/tree/master/tool_collections/samtools/samtools_idxstats
 type: unrestricted

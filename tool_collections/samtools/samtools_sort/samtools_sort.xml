@@ -35,5 +35,5 @@
 This tool uses ``samtools sort`` command to sort BAM datasets in coordinate or read name order.
 ]]>
     </help>
-    <expand macro="citations"></expand>
+    <expand macro="citations" />
 </tool>

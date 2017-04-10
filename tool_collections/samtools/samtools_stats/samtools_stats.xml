@@ -158,12 +158,12 @@
             </when>
         </conditional>
         <conditional name="filter_by_flags">
-            <param name="filter_flags" type="select" label="Set filter by flags" help="-f and -F options">
+            <param name="filter_flags" type="select" label="Filter by SAM flags" help="More info on the flags: https://samtools.github.io/hts-specs/SAMv1.pdf">
                 <option value="nofilter" selected="True">Do not filter</option>
                 <option value="filter">Filter by flags to exclude or require</option>
             </param>
             <when value="filter">
-                <param name="require_flags" type="select" display="checkboxes" multiple="True" label="Require" help="-f">
+                <param name="require_flags" argument="-f" type="select" display="checkboxes" multiple="True" label="Require">
                     <option value="1">Read is paired</option>
                     <option value="2">Read is mapped in a proper pair</option>
                     <option value="4">The read is unmapped</option>
@@ -176,7 +176,7 @@
                     <option value="512">The read fails platform/vendor quality checks</option>
                     <option value="1024">The read is a PCR or optical duplicate</option>
                 </param>
-                <param name="exclude_flags" type="select" display="checkboxes" multiple="True" label="Exclude" help="-F">
+                <param name="exclude_flags" argument="-F" type="select" display="checkboxes" multiple="True" label="Exclude">
                     <option value="1">Read is paired</option>
                     <option value="2">Read is mapped in a proper pair</option>
                     <option value="4">The read is unmapped</option>
@@ -193,12 +193,16 @@
             <when value="nofilter" />
 
         </conditional>
-        <param name="gc_depth" type="float" value="20000" label="GC-depth bin size" help="--GC-depth; decreasing bin size increases memory requirement; default = 20000.0"/>
+        <param name="gc_depth" argument="--GC-depth" type="float" value="20000" label="Size of GC-depth bins" help="Decreasing bin size increases memory requirement; default = 20000.0"/>
         <param name="insert_size" type="integer" value="8000" label="Maximum insert size" help="--insert-size; default = 8000"/>
 
         <!--
 
+<<<<<<< HEAD
             The -I option of samtools stats still returns the following message in version 1.4:
+=======
+            The -I option of samtools stats returns the following message in version 1.2:
+>>>>>>> f8fb9deb0aa36e2bda92e2df8a4faac26ebdb722
 
             Samtools-htslib: init_group_id() header parsing not yet implemented
             Abort trap: 6
@@ -213,9 +217,9 @@
 
         -->
 
-        <param name="read_length" type="integer" value="0" label="Minimum read length to generate statistics for" help="--read-length; default = no cutoff"/>
-        <param name="most_inserts" type="float" value="0.99" label="Report only the main part of inserts" help="--most-inserts; default = 0.99"/>
-        <param name="trim_quality" type="integer" value="0" label="BWA trim parameter" help="--trim-quality; default = 0"/>
+        <param name="read_length" argument="--read-length" type="integer" value="0" label="Minimum read length to generate statistics for" help="default = no cutoff"/>
+        <param name="most_inserts" argument="--most-inserts" type="float" value="0.99" label="Report only the main part of inserts" help="default = 0.99"/>
+        <param name="trim_quality" argument="--trim-quality" type="integer" value="0" label="BWA trim parameter" help="default = 0"/>
 
         <conditional name="use_reference">
             <param name="use_ref_selector" type="select" label="Use reference sequence" help="--ref-seq; required for GC-depth and mismatches-per-cycle calculation">
@@ -230,8 +234,9 @@
                     </param>
                     <when value="cached">
                         <param name="ref_file" type="select" label="Using genome">
-                            <options from_data_table="fasta_indexes" />
-                            <filter type="data_meta" ref="input_file" key="dbkey" column="1" />
+                            <options from_data_table="fasta_indexes">
+                                <filter type="data_meta" ref="input_file" key="dbkey" column="1" />
+                            </options>
                         </param>
                     </when>
                     <when value="history">
@@ -293,6 +298,6 @@ This tool runs the ``samtools stats`` command. It has the following options::
                                         one from history.
 ]]>
     </help>
-    <expand macro="citations"></expand>
+    <expand macro="citations" />
 </tool>
 

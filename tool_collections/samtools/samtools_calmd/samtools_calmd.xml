@@ -3,9 +3,9 @@
     <macros>
         <import>macros.xml</import>
     </macros>
-    <expand macro="requirements" />
-    <expand macro="version_command" />
-    <expand macro="stdio" />
+    <expand macro="requirements"/>
+    <expand macro="stdio"/>
+    <expand macro="version_command"/>
     <command><![CDATA[
         #if str( $reference_source.reference_source_selector ) == "history":
             #set ref_fa = 'ref.fa'
@@ -13,12 +13,13 @@
         #else:
             #set ref_fa = str( $reference_source.ref_fasta.fields.path )
         #end if
+
         samtools calmd
-        #if str($option_set.option_sets) == 'advanced':
-            $option_set.change_identical $option_set.modify_quality $option_set.compute_cap $option_set.extended_baq
-        #end if
-        -b "$input_bam" "$ref_fa" > "$calmd_output" ]]>
-    </command>
+            #if str($option_set.option_sets) == 'advanced':
+                $option_set.change_identical $option_set.modify_quality $option_set.compute_cap $option_set.extended_baq
+            #end if
+            -b "$input_bam" "$ref_fa" > "$calmd_output"
+    ]]></command>
     <inputs>
         <param format="bam" name="input_bam" type="data" label="BAM file to recalculate" />
         <conditional name="reference_source">
@@ -96,5 +97,5 @@ From SAM format specification::
 See refernces for more information about SAM format tags.
 ]]>
     </help>
-    <expand macro="citations"></expand>
+    <expand macro="citations" />
 </tool>

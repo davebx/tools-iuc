@@ -1,22 +1,17 @@
-<tool id="samtools_idxstats" name="IdxStats" version="2.1">
-    <description>tabulate mapping statistics for BAM dataset</description>
+<tool id="samtools_idxstats" name="IdxStats" version="2.0">
+    <description>reports stats of the BAM index file</description>
     <macros>
-        <import>macros.xml</import>
+      <import>macros.xml</import>
     </macros>
     <expand macro="requirements" />
     <expand macro="version_command" />
     <expand macro="stdio" />
     <command>
-<![CDATA[
-if [ ! -f "${input}.bai" ] ; then
-    ln -s "${input}" input.bam ;
-    samtools sort -o sorted.bam -O bam -T sts "${input}" ;
-    samtools index sorted.bam ;
-    samtools idxstats sorted.bam > "${output}" ;
-else
-    samtools idxstats "${input}" > "${output}" ;
-fi
-]]>
+    <![CDATA[
+        ln -f -s '${input.metadata.bam_index}' '${input}.bai' &&
+
+        samtools idxstats '${input}' > '${output}'
+    ]]>
     </command>
     <inputs>
         <param name="input" type="data" format="bam" label="BAM file" />
@@ -70,5 +65,5 @@ In this BAM file, the final column was otherwise zero.
 Peter J.A. Cock (2013), `Galaxy wrapper <https://github.com/peterjc/pico_galaxy/tree/master/tools/samtools_idxstats>`_ for the samtools idxstats command
 ]]>
     </help>
-    <expand macro="citations"></expand>
+    <expand macro="citations" />
 </tool>

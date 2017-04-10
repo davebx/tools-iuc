@@ -9,31 +9,26 @@
     <command>
     <![CDATA[
         #if str( $input_alignment.metadata.bam_index ) != "None":
-            ln
-                -f
-                -s
-                "${input_alignment.metadata.bam_index}"
-                "${input_alignment}.bai"
-                &&
+            ln -f -s '${input_alignment.metadata.bam_index}' '${input_alignment}.bai' &&
         #end if
 
         samtools view
             #if $parameter_regions.target_region == "regions_bed_file"
-                -L "${parameter_regions.regions_bed_file}"
+                -L '${parameter_regions.regions_bed_file}'
             #end if
 
-            -@\${GALAXY_SLOTS:-2}
+            -@\${GALAXY_SLOTS:-1}
             -C
-            -T "${reference_source.input_reference}"
-            -o "$output_alignment"
-            "$input_alignment"
+            -T '${reference_source.input_reference}'
+            -o '${output_alignment}'
+
+            '${input_alignment}'
 
             #if $parameter_regions.target_region == "region"
-                "${parameter_regions.region_string}"
+                '${parameter_regions.region_string}'
             #end if
     ]]>
     </command>
-
     <inputs>
         <param name="input_alignment" type="data" format="bam,sam" label="BAM (or SAM) alignment file"/>
         <conditional name="reference_source">
@@ -64,7 +59,8 @@
                 <param name="region_string" type="text" label="Samtools: region in which pileup is generated" help="e.g. chrX or chr:start-end" />
             </when>
             <when value="regions_bed_file">
-                <param name="regions_bed_file" type="data" format="bed" label="only include reads overlapping this BED FILE" help="-L"/>
+                <param name="regions_bed_file" type="data" format="bed"
+                       label="only include reads overlapping this BED FILE" argument="-L"/>
             </when>
         </conditional>
     </inputs>
@@ -109,15 +105,14 @@
             <output name="output_alignment" file="test.cram"  compare="sim_size" delta="250" />
         </test>
     </tests>
-
     <help>
-
+<![CDATA[
 **What this tool does**
 
-Converts alignments from the BAM format to the CRAM format using the SAMTools_ toolkit. The CRAM format does additional compression relative to the reference genome which makes the compression in terms of file size more effictient.
+Converts alignments from the BAM format to the CRAM format using the SAMTools_ toolkit. The CRAM format does additional compression relative to the reference genome which makes the compression in terms of file size more efficient.
 
 .. _SAMTools: http://samtools.sourceforge.net/samtools.shtml
+]]>
     </help>
-
-    <expand macro="citations"></expand>
+    <expand macro="citations" />
 </tool>

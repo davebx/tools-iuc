@@ -7,15 +7,15 @@
     <expand macro="version_command" />
     <expand macro="stdio" />
     <command>
-<![CDATA[
-samtools rmdup
-#if str( $bam_paired_end_type.bam_paired_end_type_selector ) == "PE"
-    ${bam_paired_end_type.force_se}
-#else:
-    -s
-#end if
-"$input1" "$output1"
-]]>
+    <![CDATA[
+    samtools rmdup
+    #if str( $bam_paired_end_type.bam_paired_end_type_selector ) == "PE"
+        ${bam_paired_end_type.force_se}
+    #else:
+        -s
+    #end if
+    "$input1" "$output1"
+    ]]>
     </command>
     <inputs>
         <param name="input1" type="data" format="bam" label="BAM File" />
@@ -25,7 +25,7 @@ samtools rmdup
                 <option value="SE">BAM is single-end (-s)</option>
             </param>
             <when value="PE">
-                <param name="force_se" type="boolean" label="Treat as single-end" help="-S" truevalue="-S" falsevalue="" checked="False"/>
+                <param name="force_se" argument="-S" type="boolean" truevalue="-S" falsevalue="" checked="False" label="Treat as single-end"/>
             </when>
             <when value="SE" /> <!-- No extra parameters here -->
         </conditional>
@@ -52,5 +52,5 @@ Remove potential PCR duplicates: if multiple read pairs have identical external 
   -S    treat PE reads as SE in rmdup (force -s)
 ]]>
     </help>
-    <expand macro="citations"></expand>
+    <expand macro="citations" />
 </tool>

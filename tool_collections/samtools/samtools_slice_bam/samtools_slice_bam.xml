@@ -113,11 +113,11 @@
 
 Allows to restrict (slice) input BAM dataset to a list of intervals defined in a BED file, individual chromosomes, or manually set list of coordinates. BED datasets can be obtained from **Get Data -> UCSC Main**.
 
-This tool is based on ``samtools view`` command.
+This tool is based on the ``samtools view`` command.
 
 @no-chrom-options@
 
 ]]>
     </help>
-    <expand macro="citations"></expand>
+    <expand macro="citations" />
 </tool>

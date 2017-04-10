@@ -7,15 +7,15 @@
     <expand macro="version_command" />
     <expand macro="stdio" />
     <command>
-<![CDATA[
-samtools split -f 'Read_Group_%!.bam'
-#if $header:
-    -u "${output}":"${header}"
-#else:
-    -u "${output}"
-#end if
-"${input_bam}"
-]]>
+    <![CDATA[
+    samtools split -f 'Read_Group_%!.bam'
+    #if $header:
+        -u "${output}":"${header}"
+    #else:
+        -u "${output}"
+    #end if
+    "${input_bam}"
+    ]]>
     </command>
     <inputs>
         <param name="input_bam" type="data" format="bam" label="BAM file" />
@@ -31,19 +31,20 @@ samtools split -f 'Read_Group_%!.bam'
             <param name="input_bam" value="phiX.bam" ftype="bam" />
             <output name="output" file="samtools_split_out.bam">
                 <discovered_dataset designation="Mouse" ftype="bam" file="phiX_Mouse.bam" />
-                <discovered_dataset designation="Elephant" ftype="bam" file="phiX_Elephant.bam" />
+                <discovered_dataset designation="Elephant" ftype="bam" file="phiX_Elephant.bam" lines_diff="10" />
                 <discovered_dataset designation="Human" ftype="bam" file="phiX_Human.bam" />
             </output>
         </test>
     </tests>
     <help>
+<![CDATA[
 **What it does**
 
 Splits BAM files on readgroups.
 
 This tool is based on ``samtools split`` command. It will generate multiple output datasets for each redagroup from the input dataset.
-
+]]>
     </help>
-    <expand macro="citations"></expand>
+    <expand macro="citations" />
 </tool>
 
