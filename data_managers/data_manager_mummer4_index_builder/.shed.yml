@@ -1,0 +1,10 @@
+categories:
+- Data Managers
+description: Data Manager for building Mummer4 indexes
+homepage_url: ''
+long_description: |
+    Data Manager for building Mummer 4 indexes.
+name: data_manager_mummer4_index_builder
+owner: iuc
+remote_repository_url: https://github.com/galaxyproject/tools-iuc/tree/master/data_managers/data_manager_mummer4_index_builder
+type: unrestricted
