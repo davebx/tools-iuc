@@ -1,0 +1,61 @@
+<tool id="data_manager_make_blastn_database" name="Create blastn database" version="0.0.1" tool_type="manage_data">
+    <description>from fasta file</description>
+    <requirements>
+        <requirement type="package" version="2.6.0">blast</requirement>
+    </requirements>
+    <command detect_errors="exit_code"><![CDATA[
+        python '$__tool_directory__/data_manager_make_blastn_database.py'
+        '${out_file}' 
+        #if str( $input_source.source_selector ) == 'history':
+            --input '$input_source.input'
+            --dbkey '$input_source.dbkey'
+            --name '$input_source.name'
+        #else
+            --input '${all_fasta_source.fields.path}'
+            --dbkey '${all_fasta_source.fields.dbkey}'
+            --name '${all_fasta_source.fields.name}'
+       #end if
+    ]]></command>
+    <inputs>
+        <conditional name="input_source">
+            <param name="source_selector" type="select" label="Use locally cached fasta or history dataset">
+                <option value="history" selected="True">From history</option>
+                <option value="data_table">From data table</option>
+            </param>
+            <when value="data_table">
+                <param name="input" type="data" label="Cached sequence">
+                    <options from_data_table="all_fasta" />
+                </param>
+            </when>
+            <when value="history">
+                <param name="input" type="data" format="fasta" optional="false" />
+                <param name="dbkey" type="text" label="Unique identifier" />
+                <param name="name" type="text" label="Display name for database" />
+            </when>
+        </conditional>
+    </inputs>
+    <outputs>
+        <data name="out_file" format="data_manager_json"/>
+    </outputs>
+    <tests>
+        <!-- TODO: need some way to test that new entry was added to data table -->
+        <test>
+            <param name="source_selector" value="history" />
+            <param name="input" value="phiX174.fasta" ftype="fasta" />
+            <param name="dbkey" value="phiX174"/>
+            <param name="name" value="Phi-X 174 12-06-1912"/>
+            <output name="out_file" file="phiX174.data_manager_json"/>
+        </test>
+    </tests>
+    <help>
+**What it does**
+
+Fetches a reference genomes or sequences from various sources (URL, Galaxy History, or a server directory) and populates the "blastn_db" data table.
+
+------
+
+.. class:: infomark
+
+**Notice:** If you leave name, description, or id blank, it will be generated automatically.
+    </help>
+</tool>
