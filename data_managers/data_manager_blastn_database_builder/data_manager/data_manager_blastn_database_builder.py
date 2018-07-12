@@ -13,7 +13,7 @@ DEFAULT_DATA_TABLE_NAMES = ["blastn_databases"]
 
 def build_blastn_index(data_manager_dict, fasta_filename, params, target_directory, dbkey, sequence_id, sequence_name, data_table_names=DEFAULT_DATA_TABLE_NAMES):
     # TODO: allow multiple FASTA input files
-    fasta_base_name = os.path.split(fasta_filename)[-1]
+    fasta_base_name = '%s.fa' % sequence_id
     sym_linked_fasta_filename = os.path.join(target_directory, fasta_base_name)
     os.symlink(fasta_filename, sym_linked_fasta_filename)
     args = ['makeblastdb', '-in', sym_linked_fasta_filename, '-dbtype', 'nucl', '-out', sequence_id]
@@ -22,9 +22,10 @@ def build_blastn_index(data_manager_dict, fasta_filename, params, target_directo
     if return_code:
         print("Error building index.", file=sys.stderr)
         sys.exit(return_code)
-    data_table_entry = dict(value=sequence_id, dbkey=dbkey, name=sequence_name, path=sequence_id)
+    data_table_entry = dict(value=sequence_id, name=sequence_name, path=target_directory)
     for data_table_name in data_table_names:
         _add_data_table_entry(data_manager_dict, data_table_name, data_table_entry)
+    print(data_manager_dict)
 
 
 def _add_data_table_entry(data_manager_dict, data_table_name, data_table_entry):

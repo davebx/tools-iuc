@@ -1,31 +1,41 @@
-<tool id="data_manager_make_blastn_database" name="Create blastn database" version="0.0.1" tool_type="manage_data">
+<tool id="data_manager_blastn_database_builder" name="Create blastn database" version="0.0.1" tool_type="manage_data">
     <description>from fasta file</description>
     <requirements>
         <requirement type="package" version="2.6.0">blast</requirement>
     </requirements>
     <command detect_errors="exit_code"><![CDATA[
-        python '$__tool_directory__/data_manager_make_blastn_database.py'
-        '${out_file}' 
+        python '$__tool_directory__/data_manager_blastn_database_builder.py'
+        '${out_file}'
         #if str( $input_source.source_selector ) == 'history':
             --input '$input_source.input'
             --dbkey '$input_source.dbkey'
             --name '$input_source.name'
         #else
-            --input '${all_fasta_source.fields.path}'
-            --dbkey '${all_fasta_source.fields.dbkey}'
-            --name '${all_fasta_source.fields.name}'
+            --input '${input_source.all_fasta.fields.path}'
+            #if $input_source.dbkey:
+                --dbkey '$input_source.dbkey'
+            #else:
+                --dbkey '${input_source.all_fasta.fields.dbkey}'
+            #end if
+            #if $input_source.name:
+                --name '$input_source.name'
+            #else:
+                --name '${input_source.all_fasta.fields.name}'
+            #end if
        #end if
     ]]></command>
     <inputs>
         <conditional name="input_source">
             <param name="source_selector" type="select" label="Use locally cached fasta or history dataset">
-                <option value="history" selected="True">From history</option>
-                <option value="data_table">From data table</option>
+                <option value="data_table" selected="True">From data table</option>
+                <option value="history">From history</option>
             </param>
             <when value="data_table">
-                <param name="input" type="data" label="Cached sequence">
+                <param name="all_fasta" type="select" label="Cached sequence">
                     <options from_data_table="all_fasta" />
                 </param>
+                <param name="dbkey" type="text" label="Unique identifier" />
+                <param name="name" type="text" label="Display name for database" />
             </when>
             <when value="history">
                 <param name="input" type="data" format="fasta" optional="false" />
