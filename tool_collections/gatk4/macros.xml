@@ -6,11 +6,36 @@
 		<requirement type="package" version="@VERSION@">gatk4</requirement>
         <yield />
     </xml>
+
+    <xml name="version_cmd">
+        <version_command>gatk SortSam --version 2>&amp;1 | grep Version | cut -d ':' -f 2</version_command>
+    </xml>
+
+    <xml name="ref_sel">
+        <conditional name="reference_source">
+            <param name="reference_source_selector" type="select" label="Choose the source for the reference list">
+                <option value="cached">Locally cached</option>
+                <option value="history">History</option>
+            </param>
+            <when value="cached">
+                <param name="reference_sequence" type="select" label="Reference" help="Reference sequence file." >
+                    <options from_data_table="picard_indexes" >
+                        <validator type="no_options" message="A built-in reference genome is not available for the build associated with the selected input file" />
+                    </options>
+                </param>
+            </when>
+            <when value="history">
+                <param name="reference_sequence" type="data" format="fasta" label="Reference" help="Reference sequence file." />
+            </when>
+        </conditional>
+    </xml>
+
     <xml name="citations">
         <citations>
             <citation type="doi">10.1101/gr.107524.110</citation>
             <citation type="doi">10.1038/ng.806</citation>
             <citation type="doi">10.1002/0471250953.bi1110s43</citation>
+            <citation type="doi">10.1101/201178</citation>
             <yield />
         </citations>
     </xml>
