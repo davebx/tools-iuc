@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<macros>
+    <token name="@VERSION@">4.0.6.0</token>
+    <token name="@WRAPPER_VERSION@">@VERSION@+galaxy</token>
+	<xml name="requirements">
+		<requirement type="package" version="@VERSION@">gatk4</requirement>
+        <yield />
+    </xml>
+    <xml name="citations">
+        <citations>
+            <citation type="doi">10.1101/gr.107524.110</citation>
+            <citation type="doi">10.1038/ng.806</citation>
+            <citation type="doi">10.1002/0471250953.bi1110s43</citation>
+            <yield />
+        </citations>
+    </xml>
+</macros>
