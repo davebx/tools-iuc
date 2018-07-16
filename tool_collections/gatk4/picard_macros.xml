@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<macros>
+    <template name="picard_opts">
+        --COMPRESSION_LEVEL ${picard_adv.COMPRESSION_LEVEL}
+        #if $picard_adv.GA4GH_CLIENT_SECRETS:
+            --GA4GH_CLIENT_SECRETS ${picard_adv.GA4GH_CLIENT_SECRETS}
+        #end if
+        --MAX_RECORDS_IN_RAM ${picard_adv.MAX_RECORDS_IN_RAM}
+        --VALIDATION_STRINGENCY ${picard_adv.VALIDATION_STRINGENCY}
+        --VERBOSITY ${picard_adv.VERBOSITY}
+        ${picard_adv.CREATE_MD5_FILE}
+        ${picard_adv.USE_JDK_DEFLATER}
+        ${picard_adv.USE_JDK_INFLATER}
+    </template>
+
+    <xml name="picard_params">
+        <param name="gzipped_output" type="boolean" checked="true" label="GZIP Output?" help="If you would like gzipped output, check this box.  In general, it would be preferable to do this, unless your downstream tool does not support handling of gzipped files." />
+        <section name="picard_adv" title="Advanced Picard Options (Only change these if you know what you're doing.)" expanded="False">
+            <param argument="--arguments_file" type="data" optional="true" format="txt" label="Arguments File" help="read one or more arguments files and add them to the command line" />
+            <param argument="--COMPRESSION_LEVEL" type="integer" optional="true" value="5" min="1" max="9" label="Compression Level" help="Compression level for all compressed files created (e.g. BAM and VCF)." />
+            <param argument="--CREATE_MD5_FILE" truevalue="--CREATE_MD5_FILE" falsevalue="" type="boolean" optional="true" checked="false" label="Create MD5 File" help="Whether to create an MD5 digest for any BAM or FASTQ files created." />
+            <param argument="--GA4GH_CLIENT_SECRETS" type="data" format="json" optional="true" label="Ga4Gh Client Secrets" help="Google Genomics API client_secrets.json file path." />
+            <param argument="--MAX_RECORDS_IN_RAM" type="integer" optional="true" value="500000" label="Max Records In Ram" help="When writing files that need to be sorted, this will specify the number of records stored in RAM before spilling to disk. Increasing this number reduces the number of file handles needed to sort the file, and increases the amount of RAM needed." />
+            <param argument="--TMP_DIR" type="text" optional="true" label="Tmp Dir" help="One or more directories with space available to be used by this program for temporary storage of working files.  Keep in mind, you must be able to access this directory from either your user, or from the Galaxy user, depending on your configuration." />
+            <param argument="--USE_JDK_DEFLATER" truevalue="--USE_JDK_DEFLATER" falsevalue="" type="boolean" optional="true" checked="false" label="Use Jdk Deflater" help="Use the JDK Deflater instead of the Intel Deflater for writing compressed output" />
+            <param argument="--USE_JDK_INFLATER" truevalue="--USE_JDK_INFLATER" falsevalue="" type="boolean" optional="true" checked="false" label="Use Jdk Inflater" help="Use the JDK Inflater instead of the Intel Inflater for reading compressed input" />
+            <param argument="--VALIDATION_STRINGENCY" type="select" optional="true" label="Validation Stringency" help="Validation stringency for all SAM files read by this program.  Setting stringency to SILENT can improve performance when processing a BAM file in which variable-length data (read, qualities, tags) do not otherwise need to be decoded." >
+                <option value="STRICT" selected="true">STRICT</option>
+                <option value="LENIENT" selected="false">LENIENT</option>
+                <option value="SILENT" selected="false">SILENT</option>
+            </param>
+            <param argument="--VERBOSITY" type="select" optional="true" label="Verbosity" help="Control verbosity of logging." >
+                <option value="ERROR" selected="false">ERROR</option>
+                <option value="WARNING" selected="false">WARNING</option>
+                <option value="INFO" selected="true">INFO</option>
+                <option value="DEBUG" selected="false">DEBUG</option>
+            </param>
+        </section>
+    </xml>
+
+    <xml name="picard_output_params">
+        <data format="vcf" name="output_vcf" label="${tool.name} on ${on_string}: vcf" from_work_dir="output.vcf" >
+			<filter>not gzipped_output</filter>
+		</data>
+		<data format="vcf_bgzip" name="output_vcf_bgzip" label="${tool.name} on ${on_string}: vcf_bgzip" from_work_dir="output.vcf.gz" >
+			<filter>gzipped_output</filter>
+		</data>
+        <data format="txt" name="output_md5" label="${tool.name} on ${on_string}: md5sum(txt)" from_work_dir="output.bam.md5" >
+			<filter>picard_adv['CREATE_MD5_FILE']</filter>
+		</data>
+    </xml>
+
+    <template name="picard_output_opts">
+        #if $gzipped_output:
+			--OUTPUT output.vcf.gz
+		#else:
+			--OUTPUT output.vcf
+		#end if
+    </template>
+
+    <template name="picard_ref_opts">
+        #if $reference_source.reference_source_selector != "history":
+        --REFERENCE_SEQUENCE ${reference_source.reference_sequence.fields.path}
+        #end if
+    </template>
+
+</macros>
