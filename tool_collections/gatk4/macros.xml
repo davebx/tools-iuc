@@ -11,6 +11,8 @@
         <version_command>gatk SortSam --version 2>&amp;1 | grep Version | cut -d ':' -f 2</version_command>
     </xml>
 
+    <token name="@CMD_BEGIN@">gatk --java-options "-Xmx28g"</token>
+
     <xml name="ref_sel">
         <conditional name="reference_source">
             <param name="reference_source_selector" type="select" label="Choose the source for the reference list">
