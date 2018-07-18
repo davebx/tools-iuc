@@ -1,7 +1,7 @@
 categories:
 - Variant Analysis
 homepage_url: https://software.broadinstitute.org/gatk/
-owner: test
+owner: iuc
 remote_repository_url: https://github.com/galaxyproject/tools-iuc/tree/master/tool_collections/gatk4
 type: unrestricted
 auto_tool_repositories:
