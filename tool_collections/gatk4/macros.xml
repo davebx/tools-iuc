@@ -2,16 +2,23 @@
 <macros>
     <token name="@VERSION@">4.0.6.0</token>
     <token name="@WRAPPER_VERSION@">@VERSION@+galaxy</token>
-	<xml name="requirements">
-		<requirement type="package" version="@VERSION@">gatk4</requirement>
-        <yield />
+
+    <xml name="requirements">
+        <requirements>
+            <requirement type="package" version="@VERSION@">gatk4</requirement>
+            <yield />
+        </requirements>
+    </xml>
+
+    <xml name="gatk_req_params">
+        <param name="input" type="data" format="bam,sam,cram" label="Input BAM/SAM/CRAM file" />
     </xml>
 
     <xml name="version_cmd">
         <version_command>gatk SortSam --version 2>&amp;1 | grep Version | cut -d ':' -f 2</version_command>
     </xml>
 
-    <token name="@CMD_BEGIN@">gatk --java-options "-Xmx28g"</token>
+    <token name="@CMD_BEGIN@">gatk \${_JAVA_OPTIONS:-'-Xmx8g -Xms256m'}</token>
 
     <xml name="ref_sel">
         <conditional name="reference_source">
@@ -30,6 +37,10 @@
                 <param name="reference_sequence" type="data" format="fasta" label="Reference" help="Reference sequence file." />
             </when>
         </conditional>
+    </xml>
+
+    <xml name="gatk_req_params">
+        <param name="input" type="data" format="bam,sam,cram" label="Input BAM/SAM/CRAM file" />
     </xml>
 
     <xml name="citations">
