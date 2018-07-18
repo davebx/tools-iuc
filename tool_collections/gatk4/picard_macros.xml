@@ -14,7 +14,6 @@
     </template>
 
     <xml name="picard_params">
-        <param name="gzipped_output" type="boolean" checked="true" label="GZIP Output?" help="If you would like gzipped output, check this box.  In general, it would be preferable to do this, unless your downstream tool does not support handling of gzipped files." />
         <section name="picard_adv" title="Advanced Picard Options (Only change these if you know what you're doing.)" expanded="False">
             <param argument="--arguments_file" type="data" optional="true" format="txt" label="Arguments File" help="read one or more arguments files and add them to the command line" />
             <param argument="--COMPRESSION_LEVEL" type="integer" optional="true" value="5" min="1" max="9" label="Compression Level" help="Compression level for all compressed files created (e.g. BAM and VCF)." />
@@ -36,6 +35,10 @@
                 <option value="DEBUG" selected="false">DEBUG</option>
             </param>
         </section>
+    </xml>
+
+    <xml name="picard_vcf_params">
+        <param name="gzipped_output" type="boolean" checked="true" label="GZIP Output?" help="If you would like gzipped output, check this box.  In general, it would be preferable to do this, unless your downstream tool does not support handling of gzipped files." />
     </xml>
 
     <xml name="picard_vcf_output_params">
