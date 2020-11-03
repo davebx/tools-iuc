@@ -19,7 +19,7 @@
             #else:
                 --test TEST
             #end if
-            > '$relax_log'
+            > '$relax_log' || cat errors.log>&2
     ]]></command>
     <inputs>
         <expand macro="inputs"/>
