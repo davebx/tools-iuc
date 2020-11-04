@@ -36,10 +36,6 @@ jobs:
     - uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
-    - uses: actions/download-artifact@v2
-      with:
-        name: Workflow artifacts
-        path: ../workflow_artifacts/
     - name: Determine latest galaxy commit
       run: echo ::set-env name=GALAXY_HEAD_SHA::$(cat ../workflow_artifacts/galaxy.sha)
     - name: Cache .cache/pip
