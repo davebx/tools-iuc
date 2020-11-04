@@ -30,8 +30,6 @@ jobs:
     - uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
     - uses: actions/checkout@v2
       with:
         fetch-depth: 1
@@ -74,3 +72,5 @@ jobs:
         fi
     - name: Show changed tools/repositories chunk list
       run: cat changed_tools_chunk.list changed_repositories_chunk.list
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
