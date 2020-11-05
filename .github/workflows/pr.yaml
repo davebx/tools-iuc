@@ -359,16 +359,6 @@ jobs:
       run: sudo apt-get install jq
     - name: Combine outputs
       run: find artifacts/ -name tool_test_output.json -exec sh -c 'planemo merge_test_reports "$@" tool_test_output.json' sh {} +
-    - name: Create tool_test_output.html
-      run: planemo test_reports tool_test_output.json --test_output tool_test_output.html
-    - name: Copy artifacts into place
-      run: |
-        mkdir upload
-        mv tool_test_output.json tool_test_output.html upload/
-    - uses: actions/upload-artifact@v2.0.1
-      with:
-        name: 'All tool test results'
-        path: upload
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
 
